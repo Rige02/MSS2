@@ -26,6 +26,7 @@ public class RegisterUserActivity extends ActionBarActivity {
     protected EditText rPassword;
     protected EditText rConfirmPassword;
     protected Button rRegisterButton;
+    protected EditText rEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class RegisterUserActivity extends ActionBarActivity {
         rPassword = (EditText) findViewById(R.id.passwordRegisterEditText);
         rConfirmPassword = (EditText) findViewById(R.id.confirmPasswordRegisterEditText);
         rRegisterButton = (Button) findViewById(R.id.registerButton);
+        rEmail = (EditText) findViewById(R.id.emailRegisterEditText);
 
         //Setting Button to listen to click
         rRegisterButton.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +47,7 @@ public class RegisterUserActivity extends ActionBarActivity {
 
                 String username = rUsername.getText().toString().trim();
                 String password = rPassword.getText().toString().trim();
+                String email = rEmail.getText().toString().trim();
                 String confirmPassword = rConfirmPassword.getText().toString().trim();
 
                 if(password.equals(confirmPassword)) {
@@ -54,6 +57,7 @@ public class RegisterUserActivity extends ActionBarActivity {
                     ParseUser user = new ParseUser();
                     user.setUsername(username);
                     user.setPassword(password);
+                    user.setEmail(email);
 
 
                     user.signUpInBackground(new SignUpCallback() {

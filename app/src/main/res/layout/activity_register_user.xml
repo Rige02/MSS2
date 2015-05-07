@@ -69,8 +69,23 @@
         android:text="@string/register_button_text"
         android:id="@+id/registerButton"
         android:background="#F47F24"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/confirmPasswordRegisterEditText"
+        android:layout_alignEnd="@+id/confirmPasswordRegisterEditText"
+        android:layout_marginBottom="92dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/emailRegisterEditText"
+        android:background="@drawable/text_box"
+        android:layout_marginTop="45dp"
+        android:hint="Enter Email Address"
         android:layout_below="@+id/confirmPasswordRegisterEditText"
-        android:layout_alignEnd="@+id/usernameRegisterEditText"
-        android:layout_marginTop="20dp" />
+        android:layout_alignLeft="@+id/confirmPasswordRegisterEditText"
+        android:layout_alignStart="@+id/confirmPasswordRegisterEditText"
+        android:layout_alignRight="@+id/registerButton"
+        android:layout_alignEnd="@+id/registerButton" />
 </RelativeLayout>

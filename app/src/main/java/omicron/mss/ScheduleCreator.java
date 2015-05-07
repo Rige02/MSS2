@@ -10,8 +10,6 @@ import java.util.List;
  * Created by Ian on 5/6/2015.
  */
 public class ScheduleCreator {
-//.get(i).getString("timeEnd")
-//.get(i).getString("timeStart")
     String[][] classes;
     List<ParseObject> schedule;
     List<ParseObject> failedSchedule = null;

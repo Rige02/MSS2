@@ -22,5 +22,8 @@
     <string name="title_activity_store_schedule">StoreScheduleActivity</string>
     <string name="start_time">Start Time</string>
     <string name="end_time">End Time</string>
+    <string name="title_activity_select_class">SelectClassActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

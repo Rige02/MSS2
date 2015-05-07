@@ -48,8 +48,8 @@ public class CreateScheduleActivity extends ActionBarActivity {
 
     //called when user clicks Add Class
     public void addClass(View view) {
-        //Intent addIntent = new Intent(this, AddClass.class);
-        //startActivity(addIntent);
+        Intent addIntent = new Intent(this, AddClassActivity.class);
+        startActivity(addIntent);
     }
 
     //called when user clicks Remove Selected Class

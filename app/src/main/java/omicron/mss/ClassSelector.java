@@ -2,6 +2,7 @@ package omicron.mss;
 
 import com.parse.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,22 +12,18 @@ public class ClassSelector {
 
     String dept;
     int classNum;
-    String sect;
 
-    public ClassSelector(String dept, int classNum, String sect){
+    public ClassSelector(String dept, int classNum){
         this.dept = dept;
         this.classNum = classNum;
-        this.sect = sect;
     }
-    public ClassSelector(String dept, String sect){
+    public ClassSelector(String dept){
         this.dept = dept;
         this.classNum = classNum;
-        this.sect = sect;
     }
-    public ClassSelector(int classNum, String sect){
+    public ClassSelector(int classNum){
         this.dept = dept;
         this.classNum = classNum;
-        this.sect = sect;
     }
 
     public List<ParseObject> get()throws ParseException{
@@ -39,5 +36,22 @@ public class ClassSelector {
         }catch(NullPointerException e) {
         }
         return query.find();
+    }
+    public ArrayList<String> getStrings()throws ParseException{
+        ArrayList<String> inStringList=new ArrayList<String>();
+        List<ParseObject> classList;
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("ClassDB");
+        if(dept!=null){
+            query.whereEqualTo("department", dept);}
+        try {
+            classNum =classNum + 0;
+            query.whereEqualTo("classNum", classNum);
+        }catch(NullPointerException e) {
+        }
+        classList = query.find();
+        for(int i=0;i<classList.size();i++){
+            inStringList.add((String)classList.get(i).get("name"));
+        }
+        return inStringList;
     }
 }

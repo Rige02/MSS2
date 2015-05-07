@@ -33,24 +33,25 @@ public class ForgotPasswordActivity extends ActionBarActivity {
 
     //called when user clicks Get Password
     public void getPassword(View view) throws ParseException{
-        EditText username = (EditText) findViewById(R.id.passwordRetrieval);
-        String name = username.getText().toString();
+        EditText email = (EditText) findViewById(R.id.passwordRetrieval);
+        String name = email.getText().toString();
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("_User");
-        query =  query.whereEqualTo("userName",name);
-
-        List<ParseObject> dataList;
-        dataList = query.find();
-        Log.d("****Object*************", "****get: " + dataList.size());
-        Toast.makeText(ForgotPasswordActivity.this, "N/A At this time", Toast.LENGTH_LONG).show();
-
-        //pop up password somehow
+        ParseUser.requestPasswordResetInBackground(name, new RequestPasswordResetCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    // An email was successfully sent with reset instructions.
+                } else {
+                    // Something went wrong. Look at the ParseException to see what's up.
+                }
+            }
+        });
+        //Toast.makeText(ForgotPasswordActivity.this, "N/A At this time", Toast.LENGTH_LONG).show();
     }
 
     //called when the user clicks Back
     public void gotoLogin(View view) {
         finish();
-         }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
