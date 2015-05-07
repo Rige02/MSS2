@@ -29,9 +29,11 @@ public class CreateScheduleActivity extends ActionBarActivity implements Adapter
     DisplayAdapter displayAdapter;
     ListView listView;
     ParseObject schedule;
+    int classClicked;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         try {
+            classClicked = -1;
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_create_schedule);
             testText = (TextView) findViewById(R.id.test);
@@ -88,13 +90,29 @@ public class CreateScheduleActivity extends ActionBarActivity implements Adapter
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        System.out.println("Position: " + position + " id: " + id);   //Debugging stuff just in case
+        System.out.println("☆*:.｡.o(≧▽≦)o.｡.:*☆");
+        classClicked = position;
+    }
 
+    public void deleteClassTemp(View view) throws ParseException {
+        if (classClicked==-1) return;
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Schedule");
+        query.whereEqualTo("ScheduleUserNum", ParseUser.getCurrentUser().getUsername()+Integer.toString(0));
+        ParseObject testing = query.find().get(0);
+        testing.put("Class"+Integer.toString(classClicked+1),"Empty");
+        testing.save();
+        Intent goToCreateSchedule = new Intent(this,CreateScheduleActivity.class);
+        startActivity(goToCreateSchedule);
+        finish();
     }
 
 
 
     public void gotoSchedule(View view) {
-        Intent schedIntent = new Intent(this, ScheduleScreenActivity.class);
+        Intent scheduleIntent = new Intent(this, ScheduleScreenActivity.class);
+        startActivity(scheduleIntent);
+        finish();
     }
 
     //called when user clicks Add Class
