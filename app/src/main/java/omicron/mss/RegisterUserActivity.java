@@ -17,6 +17,10 @@ import com.parse.SignUpCallback;
 import com.parse.ParseUser;
 import com.parse.ParseException;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import static java.lang.Object.*;
 
 
@@ -39,7 +43,6 @@ public class RegisterUserActivity extends ActionBarActivity {
         rConfirmPassword = (EditText) findViewById(R.id.confirmPasswordRegisterEditText);
         rRegisterButton = (Button) findViewById(R.id.registerButton);
         rEmail = (EditText) findViewById(R.id.emailRegisterEditText);
-
         //Setting Button to listen to click
         rRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,17 +70,25 @@ public class RegisterUserActivity extends ActionBarActivity {
                                 // User signed up Scuccessfully
                                 Toast.makeText(RegisterUserActivity.this, "Successfully Registered!", Toast.LENGTH_LONG).show();
                                 ParseObject schedule;
-                                ParseObject tempSchedule = new ParseObject("TempSchedule");
-                                tempSchedule.put("UserID",""+username);
-                                for(int i = 1; i <= 10; i++){
-                                    tempSchedule.put("Class"+Integer.toString(i),"Empty");
-                                }
+                                //ParseQuery<ParseObject> aClass = ParseQuery.getQuery("ClassDB");
+                                schedule = new ParseObject("Schedule");
+                                schedule.put("ScheduleUserNum",username+0);
+                                schedule.put("Class1","Empty");
+                                schedule.put("Class2","Empty");
+                                schedule.put("Class3","Empty");
+                                schedule.put("Class4","Empty");
+                                schedule.put("Class5","Empty");
+                                schedule.put("Class6","Empty");
+                                schedule.put("Class7","Empty");
+                                schedule.put("Class8","Empty");
+                                schedule.put("Class9","Empty");
+                                schedule.put("Class10","Empty");
                                 try {
-                                    tempSchedule.save();
+                                    schedule.save();
                                 } catch (ParseException e1) {
                                     e1.printStackTrace();
                                 }
-                                for(int createClassListCounter = 0;createClassListCounter<5;createClassListCounter++){
+                                for(int createClassListCounter = 1;createClassListCounter<=5;createClassListCounter++){
                                     schedule = new ParseObject("Schedule");
                                     schedule.put("ScheduleUserNum",""+username+createClassListCounter);
                                     try {
