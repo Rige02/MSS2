@@ -20,5 +20,8 @@
     <string name="title_activity_add_class">AddClassActivity</string>
     <string name="title_activity_edit_user">EditUserActivity</string>
     <string name="title_activity_store_schedule">StoreScheduleActivity</string>
+    <string name="title_activity_schedule_screen">ScheduleScreenActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>
