@@ -9,9 +9,10 @@ import android.view.View;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
-
+import com.parse.ParseUser;
 
 public class MainActivity extends ActionBarActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +39,16 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
-        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                ParseUser.logOut();
+                ParseUser currentUser = ParseUser.getCurrentUser();
+                Intent LoginIntent = new Intent(this, LoginActivity.class);
+                startActivity(LoginIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     //called when user clicks Create Schedule
