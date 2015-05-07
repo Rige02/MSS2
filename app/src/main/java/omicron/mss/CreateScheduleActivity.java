@@ -88,7 +88,10 @@ public class CreateScheduleActivity extends ActionBarActivity implements Adapter
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
+
+
 
     public void gotoSchedule(View view) {
         Intent schedIntent = new Intent(this, ScheduleScreenActivity.class);
