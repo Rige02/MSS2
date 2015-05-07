@@ -25,7 +25,6 @@ public class AddBlockedTimeActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_add_blocked_time, menu);
         return true;
     }
-
     //called when user clicks Back
     public void backToCreate(View view) {
         finish();

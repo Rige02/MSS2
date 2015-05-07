@@ -10,10 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.SignUpCallback;
 import com.parse.ParseUser;
 import com.parse.ParseException;
 
+import static java.lang.Object.*;
 
 
 public class RegisterUserActivity extends ActionBarActivity {
@@ -55,8 +59,20 @@ public class RegisterUserActivity extends ActionBarActivity {
                     user.signUpInBackground(new SignUpCallback() {
                         public void done(ParseException e) {
                             if (e == null) {
+
                                 // User signed up Scuccessfully
                                 Toast.makeText(RegisterUserActivity.this, "Successfully Registered!", Toast.LENGTH_LONG).show();
+                                ParseObject schedule = new ParseObject("Schedule");
+                                for(int createClassListCounter = 0;createClassListCounter<5;createClassListCounter++){
+                                    schedule = new ParseObject("Schedule");
+                                    schedule.put("ScheduleUserNum",ParseUser.getCurrentUser().getUsername()+Integer.toString(createClassListCounter));
+                                    try {
+                                        schedule.save();
+                                    } catch (ParseException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                    finish();
+                                }
                             } else {
                                 // Sign up didn't succeed. Look at the ParseException
                                 Toast.makeText(RegisterUserActivity.this, "Registration Failed!", Toast.LENGTH_LONG).show();

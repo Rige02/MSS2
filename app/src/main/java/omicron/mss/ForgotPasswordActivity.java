@@ -3,10 +3,16 @@ package omicron.mss;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.parse.*;
+
+import java.util.List;
 
 
 public class ForgotPasswordActivity extends ActionBarActivity {
@@ -26,9 +32,18 @@ public class ForgotPasswordActivity extends ActionBarActivity {
     }
 
     //called when user clicks Get Password
-    public void getPassword(View view) {
+    public void getPassword(View view) throws ParseException{
         EditText username = (EditText) findViewById(R.id.passwordRetrieval);
         String name = username.getText().toString();
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("_User");
+        query =  query.whereEqualTo("userName",name);
+
+        List<ParseObject> dataList;
+        dataList = query.find();
+        Log.d("****Object*************", "****get: " + dataList.size());
+        Toast.makeText(ForgotPasswordActivity.this, "N/A At this time", Toast.LENGTH_LONG).show();
+
         //pop up password somehow
     }
 
