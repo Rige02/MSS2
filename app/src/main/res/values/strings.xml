@@ -26,5 +26,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_schedule_screen">ScheduleScreenActivity</string>
+    <string name="title_activity_change_password">ChangePasswordActivity</string>
 
 </resources>
