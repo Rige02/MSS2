@@ -76,11 +76,8 @@ public class CreateScheduleActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //called when user clicks Create
-    public void create(View view) {
-        //Don't forget to add ScheduleCreator call
-        //Intent createIntent = new Intent(this, SelectSchedule.class);
-        //startActivity(createIntent);
+    public void gotoSchedule(View view) {
+        Intent schedIntent = new Intent(this, ScheduleScreenActivity.class);
     }
 
     //called when user clicks Add Class

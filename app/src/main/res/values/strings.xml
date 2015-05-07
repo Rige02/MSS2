@@ -25,5 +25,6 @@
     <string name="title_activity_select_class">SelectClassActivity</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_schedule_screen">ScheduleScreenActivity</string>
 
 </resources>
