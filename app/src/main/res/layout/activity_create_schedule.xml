@@ -55,9 +55,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create"
+        android:text="Schedule Options"
         android:id="@+id/createButton"
-        android:onClick="create"
+        android:onClick="gotoSchedule"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/addClassButton"
         android:layout_toEndOf="@+id/addClassButton"

@@ -75,6 +75,8 @@ public class AddClassActivity extends ActionBarActivity {
         //Put that object into the goToSelectClass bundle
         // this should put our classList into the bundle to be passed to the other intent
         forSelectClass.putStringArrayList("ListofClasses",listOfClasses);
+        forSelectClass.putString("dept",dept);
+        forSelectClass.putInt("classNum",classNum);
         goToSelectClass.putExtras(forSelectClass);  //This tells this intent to store the bundle into it as an extra
         startActivity(goToSelectClass);
         finish();

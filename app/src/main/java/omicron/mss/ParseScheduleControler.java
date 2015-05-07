@@ -48,4 +48,13 @@ public class ParseScheduleControler {
         }
         return scheduleList;
     }
+
+    public ParseObject retrieveTempSchedule() throws ParseException {
+        int i;
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("TempSchedule");
+        ParseObject schedule;
+        List<ParseObject> scheduleList = null;
+        query.whereEqualTo("UserID",ParseUser.getCurrentUser().getUsername());
+        return query.getFirst();
+    }
 }

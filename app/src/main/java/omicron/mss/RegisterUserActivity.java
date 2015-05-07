@@ -45,7 +45,7 @@ public class RegisterUserActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                String username = rUsername.getText().toString().trim();
+                final String username = rUsername.getText().toString().trim();
                 String password = rPassword.getText().toString().trim();
                 String email = rEmail.getText().toString().trim();
                 String confirmPassword = rConfirmPassword.getText().toString().trim();
@@ -66,10 +66,20 @@ public class RegisterUserActivity extends ActionBarActivity {
 
                                 // User signed up Scuccessfully
                                 Toast.makeText(RegisterUserActivity.this, "Successfully Registered!", Toast.LENGTH_LONG).show();
-                                ParseObject schedule = new ParseObject("Schedule");
+                                ParseObject schedule;
+                                ParseObject tempSchedule = new ParseObject("TempSchedule");
+                                tempSchedule.put("UserID",""+username);
+                                for(int i = 1; i <= 10; i++){
+                                    tempSchedule.put("Class"+Integer.toString(i),"Empty");
+                                }
+                                try {
+                                    tempSchedule.save();
+                                } catch (ParseException e1) {
+                                    e1.printStackTrace();
+                                }
                                 for(int createClassListCounter = 0;createClassListCounter<5;createClassListCounter++){
                                     schedule = new ParseObject("Schedule");
-                                    schedule.put("ScheduleUserNum",ParseUser.getCurrentUser().getUsername()+Integer.toString(createClassListCounter));
+                                    schedule.put("ScheduleUserNum",""+username+createClassListCounter);
                                     try {
                                         schedule.save();
                                     } catch (ParseException e1) {

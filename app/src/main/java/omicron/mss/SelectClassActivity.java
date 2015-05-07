@@ -2,6 +2,7 @@ package omicron.mss;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.os.ParcelableCompatCreatorCallbacks;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -13,7 +14,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,7 +49,7 @@ public class SelectClassActivity extends ActionBarActivity implements AdapterVie
         arrayList = new ArrayList<>();
 
         for(int i = 0; i < listOfClasses.size(); i++){  //Gets the information from the ParseObject and store it into the string that gets stored into the arraylist
-            str = listOfClasses.get(i)+" "+listOfClasses.get(i);//this needs to be updated to show all information
+            str = listOfClasses.get(i);//this needs to be updated to show all information
             arrayList.add(str);
         }
 
@@ -88,9 +92,26 @@ public class SelectClassActivity extends ActionBarActivity implements AdapterVie
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        System.out.println("Position: " + position + " id: " + id);   //Debugging stuff just in case
-        System.out.println("☆*:.｡.o(≧▽≦)o.｡.:*☆");
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+        try {
+            ParseObject clickedClass;
+            ParseObject tempSchedule;
+            System.out.println("Position: " + position + " id: " + id);   //Debugging stuff just in case
+            System.out.println("☆*:.｡.o(≧▽≦)o.｡.:*☆");
+            String dept = receiveFromAddClass.getString("dept");
+            int classNum = receiveFromAddClass.getInt("classNum");
+            clickedClass = ((List<ParseObject>) (new ClassSelector(dept, classNum)).get()).get(0);
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("TempSchedule");
+            query.whereEqualTo("UserID", ParseUser.getCurrentUser().getUsername());
+            tempSchedule = query.find().get(0);
+            tempSchedule.add("class"/*+add number of classes*/, clickedClass);
+            tempSchedule.save();
+            Intent goToCreateSchedule = new Intent(this,CreateScheduleActivity.class);
+            startActivity(goToCreateSchedule);
+            finish();
+        }catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }
 
