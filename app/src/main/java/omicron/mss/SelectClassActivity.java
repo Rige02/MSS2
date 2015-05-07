@@ -101,8 +101,8 @@ public class SelectClassActivity extends ActionBarActivity implements AdapterVie
             String dept = receiveFromAddClass.getString("dept");
             int classNum = receiveFromAddClass.getInt("classNum");
             clickedClass = ((List<ParseObject>) (new ClassSelector(dept, classNum)).get()).get(0);
-            ParseQuery<ParseObject> query = ParseQuery.getQuery("TempSchedule");
-            query.whereEqualTo("UserID", ParseUser.getCurrentUser().getUsername());
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Schedule");
+            query.whereEqualTo("ScheduleUserNum", ParseUser.getCurrentUser().getUsername()+Integer.toString(0));
             tempSchedule = query.find().get(0);
             tempSchedule.add("class"/*+add number of classes*/, clickedClass);
             tempSchedule.save();
