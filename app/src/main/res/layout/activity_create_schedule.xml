@@ -24,10 +24,11 @@
         android:text="Remove Selected Class"
         android:id="@+id/removeClassButton"
         android:layout_marginTop="20dp"
-        android:onClick="removeClass"
+        android:onClick="deleteClassTemp"
         android:layout_below="@+id/addClassButton"
         android:layout_centerHorizontal="true"
-        android:background="#aba3a3a3" />
+        android:background="#aba3a3a3"
+        android:nestedScrollingEnabled="true" />
 
     <Button
         android:layout_width="wrap_content"
