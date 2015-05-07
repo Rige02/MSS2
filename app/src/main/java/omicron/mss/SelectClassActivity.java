@@ -96,7 +96,6 @@ public class SelectClassActivity extends ActionBarActivity implements AdapterVie
     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         try {
             ParseObject clickedClass;
-            ParseObject tempSchedule;
             System.out.println("Position: " + position + " id: " + id);   //Debugging stuff just in case
             System.out.println("☆*:.｡.o(≧▽≦)o.｡.:*☆");
             String dept = receiveFromAddClass.getString("dept");
