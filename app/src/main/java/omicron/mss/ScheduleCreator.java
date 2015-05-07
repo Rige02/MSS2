@@ -13,10 +13,12 @@ public class ScheduleCreator {
     String[][] classes;
     List<ParseObject> schedule;
     List<ParseObject> failedSchedule = null;
+    String[] days;
     public ScheduleCreator(List<ParseObject> classList){
         for(int i = 0; i < classList.size(); i++){
             this.classes[i][0] = classList.get(i).getString("timeStart");
             this.classes[i][1] = classList.get(i).getString("timeEnd");
+            this.days[i] = classList.get(i).getString("days");
         }
         schedule = classList;
     }
@@ -38,10 +40,14 @@ public class ScheduleCreator {
         for(int i = 0; i < classes.length; i++){
             for(int j = 0; j < classes.length; j++) {
                 if(i != j && classes[i][0].compareTo("TBA") != 0 || classes[j][0].compareTo("TBA") != 0) {
-                    if (classes[i][1].compareTo(classes[j][0]) >= 0 && classes[j][1].compareTo(classes[i][0]) >= 0) {
-                        return true;
-                    /*if the end time of the first class is after or the same as the start of the second and the end time of the
-                    *second class is after or the same as the start of the first, there's a conflict*/
+                    if(days[i].contains("Mo") && days[j].contains("Mo") ||days[i].contains("Tu") && days[j].contains("Tu") ||
+                            days[i].contains("We") && days[j].contains("We") || days[i].contains("Th") && days[j].contains("Th") ||
+                            days[i].contains("Fr") && days[j].contains("Fr") || days[i].contains("Sa") && days[j].contains("Sa")){
+                        if (classes[i][1].compareTo(classes[j][0]) >= 0 && classes[j][1].compareTo(classes[i][0]) >= 0) {
+                            return true;
+                            /*if the end time of the first class is after or the same as the start of the second and the end time of the
+                            *second class is after or the same as the start of the first, there's a conflict*/
+                        }
                     }
                 }
             }
