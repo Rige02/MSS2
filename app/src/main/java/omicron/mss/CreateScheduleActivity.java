@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
@@ -20,24 +22,28 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class CreateScheduleActivity extends ActionBarActivity {
+public class CreateScheduleActivity extends ActionBarActivity implements AdapterView.OnItemClickListener{
     TextView testText;
     String str;
     ArrayList<String> arrayList;
     DisplayAdapter displayAdapter;
     ListView listView;
-
+    ParseObject schedule;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         try {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_create_schedule);
             testText = (TextView) findViewById(R.id.test);
-            ParseObject tempSchedule =new ParseScheduleControler().retrieveTempSchedule();
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Schedule");
+            query.whereEqualTo("ScheduleUserNum",ParseUser.getCurrentUser().getUsername()+Integer.toString(0));
+            schedule= query.find().get(0);
+            listView = (ListView) findViewById(R.id.classes);
+            listView.setOnItemClickListener(this);
             arrayList = new ArrayList<>();
 
             for(int i = 1; i <=10; i++){  //Gets the information from the ParseObject and store it into the string that gets stored into the arraylist
-                str = (String)((ParseObject)tempSchedule.get("Class"+i)).get("name");//this needs to be updated to show all information
+                str = (String)schedule.get("Class"+Integer.toString(i));//this needs to be updated to show all information
                 arrayList.add(str);
             }
 
@@ -51,6 +57,10 @@ public class CreateScheduleActivity extends ActionBarActivity {
         }catch(ParseException e){
             e.printStackTrace();
         }
+    }
+
+    protected void onResume(){
+        super.onResume();
     }
 
 
@@ -74,6 +84,10 @@ public class CreateScheduleActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
     }
 
     public void gotoSchedule(View view) {
