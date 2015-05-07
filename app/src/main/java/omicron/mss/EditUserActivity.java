@@ -3,9 +3,15 @@ package omicron.mss;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import com.parse.*;
+
+
 
 
 public class EditUserActivity extends ActionBarActivity {
@@ -33,8 +39,27 @@ public class EditUserActivity extends ActionBarActivity {
         //add change password algorithm
     }
 
-    public void deleteAccount(View view) {
+    public void deleteAccount(View view) throws ParseException {
         //add delete account algorithm
+        // get current user object ID
+        // delete row of object ID
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        Log.d("current user", " is" + currentUser.getUsername());
+        // Authenticate user to delete id
+        if(currentUser.isAuthenticated()){
+            Log.d("This User", " is Authenticated");
+            currentUser.delete();  // delete userID from Parse.com
+            Toast.makeText(EditUserActivity.this, "Successfully Deleted", Toast.LENGTH_LONG).show();
+            // Go back to login display
+            Intent loginIntent = new Intent(this, LoginActivity.class);
+            startActivity(loginIntent);
+
+        }
+        else{
+            Log.d("This User", " is Not Authenticated");
+            Toast.makeText(EditUserActivity.this, "You Can't Delete", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override
