@@ -64,7 +64,8 @@ public class MainActivity extends ActionBarActivity {
 
     //called when user clicks Edit User
     public void editUser(View view) {
-        //Intent editIntent = new Intent(this, EditUserActivity.class);
-        //startActivity(editIntent);
+        Intent editIntent = new Intent(this, EditUserActivity.class);
+        startActivity(editIntent);
+
     }
 }

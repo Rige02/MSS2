@@ -45,7 +45,7 @@ public class ForgotPasswordActivity extends ActionBarActivity {
                 }
             }
         });
-        //Toast.makeText(ForgotPasswordActivity.this, "N/A At this time", Toast.LENGTH_LONG).show();
+        Toast.makeText(ForgotPasswordActivity.this, "N/A At this time", Toast.LENGTH_LONG).show();
     }
 
     //called when the user clicks Back
