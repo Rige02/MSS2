@@ -42,13 +42,12 @@ public class MainActivity extends ActionBarActivity {
         switch (item.getItemId()) {
             case R.id.action_logout:
                 ParseUser.logOut();
-                ParseUser currentUser = ParseUser.getCurrentUser();
-                Intent LoginIntent = new Intent(this, LoginActivity.class);
-                startActivity(LoginIntent);
+                Intent loginIntent = new Intent(this, LoginActivity.class);
+                startActivity(loginIntent);
+                finish();
                 return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
+        return false;
     }
 
     //called when user clicks Create Schedule

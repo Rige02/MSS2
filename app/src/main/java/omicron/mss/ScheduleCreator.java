@@ -1,20 +1,26 @@
 package omicron.mss;
 
+import com.parse.ParseObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Ian on 5/6/2015.
  */
 public class ScheduleCreator {
-
+//.get(i).getString("timeEnd")
+//.get(i).getString("timeStart")
     String[][] classes;
-    public ScheduleCreator(String[][] classes){
-        for(int i = 0; i < classes.length; i++){
-            for(int j = 0; j < 2; j++){
-                this.classes[i][j] = classes[i][j];
-            }
+    List<ParseObject> schedule;
+    List<ParseObject> failedSchedule = null;
+    public ScheduleCreator(List<ParseObject> classList){
+        for(int i = 0; i < classList.size(); i++){
+            this.classes[i][0] = classList.get(i).getString("timeStart");
+            this.classes[i][1] = classList.get(i).getString("timeEnd");
         }
+        schedule = classList;
     }
 
     public void convert() throws Exception{//converts class times to 24 hour format
@@ -45,18 +51,12 @@ public class ScheduleCreator {
         return false;
     }
 
-    public void run() throws Exception {
+    public List<ParseObject> run() throws Exception {
         convert();
         if(hasConflicts()){
-
+            return failedSchedule;
         }
+        return schedule;
     }
 
-    public static void main(String[] args) throws Exception {
-        for(int i = 0; i < 10; i++){
-            //ClassSelector
-        }
-        //ScheduleCreator create = new ScheduleCreator();
-        //create.run();
-    }
 }

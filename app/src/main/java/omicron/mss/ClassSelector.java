@@ -18,18 +18,26 @@ public class ClassSelector {
         this.classNum = classNum;
         this.sect = sect;
     }
-
-    public void get()throws ParseException{
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("ClassDB");
-        List<ParseObject> classList = null, tempClassList;
-        query.whereEqualTo("department", dept);
-        tempClassList = query.find();
-        for(int i = 0; i < tempClassList.size(); i++){
-            if(tempClassList.get(i).getNumber("classNum") == classNum){
-                classList.add(tempClassList.get(i));
-            }
-        }
+    public ClassSelector(String dept, String sect){
+        this.dept = dept;
+        this.classNum = classNum;
+        this.sect = sect;
+    }
+    public ClassSelector(int classNum, String sect){
+        this.dept = dept;
+        this.classNum = classNum;
+        this.sect = sect;
     }
 
-
+    public List<ParseObject> get()throws ParseException{
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("ClassDB");
+        if(dept!=null){
+            query.whereEqualTo("department", dept);}
+        try {
+            classNum =classNum + 0;
+            query.whereEqualTo("classNum", classNum);
+        }catch(NullPointerException e) {
+        }
+        return query.find();
+    }
 }
