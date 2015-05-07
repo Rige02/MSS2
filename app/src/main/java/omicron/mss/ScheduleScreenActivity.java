@@ -47,7 +47,7 @@ public class ScheduleScreenActivity extends ActionBarActivity implements Adapter
     }
 
 
-    public void saveSchedule(View view) throws Exception {
+    /*public void saveSchedule(View view) throws Exception {
         ParseObject newObject;
         String className;
         List<ParseObject> classesTemp;
@@ -89,7 +89,7 @@ public class ScheduleScreenActivity extends ActionBarActivity implements Adapter
     }
     protected void onResume(){
         super.onResume();
-    }
+    }*/
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
