@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -103,12 +104,26 @@ public class SelectClassActivity extends ActionBarActivity implements AdapterVie
             clickedClass = ((List<ParseObject>) (new ClassSelector(dept, classNum)).get()).get(0);
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Schedule");
             query.whereEqualTo("ScheduleUserNum", ParseUser.getCurrentUser().getUsername()+Integer.toString(0));
-            tempSchedule = query.find().get(0);
-            tempSchedule.add("class"/*+add number of classes*/, clickedClass);
-            tempSchedule.save();
-            Intent goToCreateSchedule = new Intent(this,CreateScheduleActivity.class);
-            startActivity(goToCreateSchedule);
-            finish();
+            List<ParseObject> testing = query.find();
+            for(int i=1;i<=10;i++){
+                if(testing.get(0).get("Class"+Integer.toString(i)).equals("Empty")){
+                    testing.get(0).put("Class"+Integer.toString(i),clickedClass.get("name"));
+                    testing.get(0).save();
+                    Intent goToCreateSchedule = new Intent(this,CreateScheduleActivity.class);
+                    startActivity(goToCreateSchedule);
+                    finish();
+                    break;
+                }
+                else{
+                    if(i==10) {
+                        Toast.makeText(SelectClassActivity.this, "No Room for class", Toast.LENGTH_LONG).show();
+                        Intent goToCreateSchedule = new Intent(this, CreateScheduleActivity.class);
+                        startActivity(goToCreateSchedule);
+                        finish();
+                        break;
+                    }
+                }
+            }
         }catch (ParseException e) {
             e.printStackTrace();
         }
