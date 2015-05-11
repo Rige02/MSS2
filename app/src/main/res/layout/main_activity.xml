@@ -14,7 +14,8 @@
         android:layout_gravity="center_horizontal"
         android:text="Main"
         android:gravity="center"
-        android:textSize="32sp" />
+        android:textSize="32sp"
+        android:textColor="#ffffffff" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -24,10 +25,12 @@
         android:id="@+id/button3"
         android:onClick="createSchedule"
         android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/editText3"
-        android:layout_centerHorizontal="true"
         android:background="#F47424"
-        android:gravity="center" />
+        android:gravity="center"
+        android:layout_below="@+id/editText3"
+        android:layout_toStartOf="@+id/button4"
+        android:layout_alignRight="@+id/button4"
+        android:layout_alignEnd="@+id/button4" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -37,11 +40,11 @@
         android:id="@+id/button4"
         android:layout_gravity="center_horizontal"
         android:onClick="viewSchedule"
-        android:layout_marginTop="44dp"
-        android:layout_below="@+id/button3"
-        android:layout_centerHorizontal="true"
+        android:layout_marginTop="106dp"
         android:background="#F47424"
-        android:gravity="center" />
+        android:gravity="center"
+        android:layout_below="@+id/button3"
+        android:layout_centerHorizontal="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
